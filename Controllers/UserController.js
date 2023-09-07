@@ -13,12 +13,14 @@ const generateToken = (id) =>{
 module.exports.Login = async(req,res)=>{
     try{
         const data = req.body
-        const newData = new loginmodel(data)
-
-        await newData.save()
-
-        console.log(data)
-        res.send(data)
+        const user = await signupmodel.findOne({userName:data.userName})
+        if((user.userName === data.userName) && (user.password === data.password)){
+            console.log("Welcome to goa singham")
+            res.status(200).json({message:"User Found",_id:user.id,userName:user.userName})
+        }
+        else{
+            res.status(400).send("Incorrect UserName of password")
+        }
 
     }
     catch(e){   
@@ -26,16 +28,6 @@ module.exports.Login = async(req,res)=>{
     }
 }
 
-module.exports.readLogin = async(req,res)=>{
-    try{
-        const data = await loginmodel.find()
-        res.json(data)
-        console.log(data)
-    }
-    catch(e){
-        console.log(e)
-    }
-}
 
 module.exports.otp = async(req,res)=>{
     try{
@@ -107,4 +99,24 @@ module.exports.verifyOtp = async(req,res)=>{
         console.log(e)
     }
     
+}
+
+module.exports.signUp = async(req,res)=>{
+    try{
+        const data = req.body
+        const modelStore = new signupmodel({
+            firstName:data.fname,
+            lastName:data.lname,
+            phnumber:data.phone,
+            password:data.password,
+            userName:data.userName
+
+        })
+
+        await modelStore.save()
+        res.status(200).send("Sign Up Done!!")
+    }
+    catch(e){
+        res.status(400).send(e)
+    }
 }

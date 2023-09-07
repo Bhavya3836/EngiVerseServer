@@ -5,7 +5,6 @@ module.exports.signupmodel = model('signupmodel',Schema({
         type:String,
         required:true
     },
-    MiddleNme : String,
     lastName : {
         type:String,
         required:true
@@ -15,6 +14,10 @@ module.exports.signupmodel = model('signupmodel',Schema({
         required:true
     },
     password :{
+        type:String,
+        required:true
+    },
+    userName :{
         type:String,
         required:true
     }
