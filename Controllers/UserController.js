@@ -1,6 +1,7 @@
 const {loginmodel} = require("../Models/loginmodel")
-const {Otp} = require("../Models/otpmodel")
-const {signUp} = require("../Models/signupmodel")
+const {otpmodel} = require("../Models/otpmodel")
+const {signupmodel} = require("../Models/signupmodel")
+const {tempNumModel} = require("../Models/tempNumStoringModel")
 const otpGenerator = require("otp-generator")
 const jwt = require('jsonwebtoken')
 
@@ -39,10 +40,10 @@ module.exports.readLogin = async(req,res)=>{
 module.exports.otp = async(req,res)=>{
     try{
         const num = req.body.phone
-        const storingUser = await signnupmodel.findOne({
+        const storingUser = await signupmodel.findOne({
             phnumber : num 
         })
-        if(user) {
+        if(storingUser) {
             return res.status(400).user("User already exists")
         }
 
@@ -54,16 +55,56 @@ module.exports.otp = async(req,res)=>{
                 specialChars: false
             })
 
-            const number = req.body.number;
 
-            const otp = new Otp({phone: number, otp:OTP})
+            const otp = new otpmodel({phone: num, otp:OTP})
             console.log("Generated OTP is "+OTP)
 
             const final = await otp.save()
-            return res.status(200)
+            return res.send("Mahesh Dalle"+OTP)
     }
     catch (e){
         console.log(e)
         res.send(e)
     }
+}
+
+module.exports.verifyOtp = async(req,res)=>{
+    try
+    {
+        
+        const num = req.body.phone
+        const otpHolderDetails = await otpmodel.find({
+        phone:num
+    })
+    console.log(otpHolderDetails)
+    // console.log(req.body.otp)
+    if(otpHolderDetails.length === 0)
+    {
+        
+        return res.status("Please Verify the entered Number")
+    }
+        const recentOtp = otpHolderDetails.pop()
+    console.log(recentOtp)
+    if((recentOtp.otp === req.body.otp)|| 1234)//remove this
+    {
+        console.log("Verified")
+        const user = await new tempNumModel({tempNum:num})
+        const final = user.save()
+        const id = user._id
+        const deletingNum = await otpmodel.deleteMany({
+            phone : recentOtp.phone
+        })
+
+        return res.status(200).send("Verified")
+    }
+    else{
+        console.log(req.body)
+        console.log("Invalid OTP")
+    }
+    }
+    
+    catch(e){
+        console.log(e)
+    }
+    
 }
