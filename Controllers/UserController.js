@@ -109,7 +109,9 @@ module.exports.signUp = async(req,res)=>{
             lastName:data.lname,
             phnumber:data.phone,
             password:data.password,
-            userName:data.userName
+            userName:data.userName,
+            dob:data.dob,
+            gender:data.gender
 
         })
         console.log(data)
