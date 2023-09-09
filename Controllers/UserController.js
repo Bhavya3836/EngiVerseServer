@@ -87,7 +87,7 @@ module.exports.verifyOtp = async(req,res)=>{
             phone : recentOtp.phone
         })
 
-        return res.status(200).send("Verified")
+        return res.status(200).json({message:"Verified",token:generateToken(id)})
     }
     else{
         console.log(req.body)
@@ -112,11 +112,12 @@ module.exports.signUp = async(req,res)=>{
             userName:data.userName
 
         })
-
+        console.log(data)
         await modelStore.save()
-        res.status(200).send("Sign Up Done!!")
+        res.status(200).json({message:"Sign Up Done!!"})
     }
     catch(e){
-        res.status(400).send(e)
+        console.log(e)
+        res.status(300).json({error:e,message:e.message})
     }
 }
