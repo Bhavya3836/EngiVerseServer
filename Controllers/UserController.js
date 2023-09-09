@@ -77,7 +77,7 @@ module.exports.verifyOtp = async(req,res)=>{
     }
         const recentOtp = otpHolderDetails.pop()
     console.log(recentOtp)
-    if((recentOtp.otp === req.body.otp)|| 1234)//remove this
+    if((recentOtp.otp === req.body.otp))//remove this
     {
         console.log("Verified")
         const user = await new tempNumModel({tempNum:num})
@@ -107,14 +107,14 @@ module.exports.signUp = async(req,res)=>{
         const modelStore = new signupmodel({
             firstName:data.fname,
             lastName:data.lname,
-            phnumber:data.phone,
+            phNumber:data.phone,
             password:data.password,
             userName:data.userName,
             dob:data.dob,
             gender:data.gender
 
         })
-
+        console.log(data)
         await modelStore.save()
         res.status(200).send("Sign Up Done!!")
     }
