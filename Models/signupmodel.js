@@ -9,7 +9,7 @@ module.exports.signupmodel = model('signupmodel',Schema({
         type:String,
         required:true
     },
-    phnumber :{
+    phNumber :{
         type:String,
         required:true
     },
@@ -20,6 +20,14 @@ module.exports.signupmodel = model('signupmodel',Schema({
     userName :{
         type:String,
         required:true
+    },
+    gender :{
+        type : String,
+        required : true
+    },
+    dob :{
+        type : date ,
+        required :true
     }
 
    
