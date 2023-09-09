@@ -26,7 +26,7 @@ module.exports.signupmodel = model('signupmodel',Schema({
         required : true
     },
     dob :{
-        type : date ,
+        type : Date,
         required :true
     }
 

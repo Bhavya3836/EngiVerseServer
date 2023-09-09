@@ -105,9 +105,9 @@ module.exports.signUp = async(req,res)=>{
     try{
         const data = req.body
         const modelStore = new signupmodel({
-            firstName:data.fname,
-            lastName:data.lname,
-            phnumber:data.phone,
+            firstName:data.fName,
+            lastName:data.lName,
+            phNumber:data.phone,
             password:data.password,
             userName:data.userName,
             dob:data.dob,
@@ -116,10 +116,10 @@ module.exports.signUp = async(req,res)=>{
         })
         console.log(data)
         await modelStore.save()
-        res.status(200).json({message:"Sign Up Done!!"})
+        res.json({message:"Sign Up Done!!"})
     }
     catch(e){
-        console.log(e)
+        // console.log(e)
         res.status(300).json({error:e,message:e.message})
     }
-}
+}   
