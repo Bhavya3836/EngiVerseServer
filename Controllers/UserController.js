@@ -36,7 +36,7 @@ module.exports.otp = async(req,res)=>{
             phnumber : num 
         })
         if(storingUser) {
-            return res.status(400).user("User already exists")
+            return res.json({message:"User already exists",status:200})
         }
 
         const OTP = otpGenerator.generate(4,
