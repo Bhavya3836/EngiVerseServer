@@ -87,7 +87,7 @@ module.exports.verifyOtp = async(req,res)=>{
             phone : recentOtp.phone
         })
 
-        return res.status(200).send("Verified")
+        return res.status(200).json({message:"Verified",token:generateToken(id)})
     }
     else{
         console.log(req.body)
@@ -105,9 +105,9 @@ module.exports.signUp = async(req,res)=>{
     try{
         const data = req.body
         const modelStore = new signupmodel({
-            firstName:data.fname,
-            lastName:data.lname,
-            phNumber:data.phone,
+            firstName:data.fName,
+            lastName:data.lName,
+            phnumber:data.phone,
             password:data.password,
             userName:data.userName,
             dob:data.dob,
@@ -116,9 +116,10 @@ module.exports.signUp = async(req,res)=>{
         })
         console.log(data)
         await modelStore.save()
-        res.status(200).send("Sign Up Done!!")
+        res.json({message:"Sign Up Done!!"})
     }
     catch(e){
-        res.status(400).send(e)
+        // console.log(e)
+        res.status(300).json({error:e,message:e.message})
     }
-}
+}   
