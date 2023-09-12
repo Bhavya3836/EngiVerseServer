@@ -1,6 +1,6 @@
 const {Schema,model} = require('mongoose')
 
-module.exports.product = model('product',Schema({
+module.exports.productmodel = model('productamodel',Schema({
     productName : {
         type:String,
         required:true
@@ -10,7 +10,7 @@ module.exports.product = model('product',Schema({
         required:true
     },
     productDesc: {
-        type:Date,
+        type:String,
         required:true
     },
     productRating : {
@@ -20,5 +20,5 @@ module.exports.product = model('product',Schema({
     productCat : {
         type:String,
         required:true
-    },
+    }
 },{timestamps:true}))

@@ -18,7 +18,7 @@ module.exports.loginAuth = asyncHandler(async (req, res, next)=>{
             res.status(401).send("not Authorised")
         }
     }
-    if(!token){
+    if(!extrackingJWT){
         res.status(401).send("no token found")
     }
 })

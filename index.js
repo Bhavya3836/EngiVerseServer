@@ -10,6 +10,7 @@ const port = process.env.PORT
 
 
 const loginR = require("./Routers/User")
+const adminR = require("./Routers/Admin")
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:false}))
@@ -23,7 +24,7 @@ app.use(cors({
 }))
 
 app.use('/user',loginR)
-
+app.use('/admin',adminR)
 
 mongoose.connect(process.env.MongURL).then(()=>{
     console.log("Connected")
