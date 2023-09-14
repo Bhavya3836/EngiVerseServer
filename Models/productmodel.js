@@ -20,5 +20,9 @@ module.exports.productmodel = model('productamodel',Schema({
     productCat : {
         type:String,
         required:true
+    },
+    productImage : {
+        type:String,
+        required:true
     }
 },{timestamps:true}))
