@@ -15,8 +15,9 @@ module.exports.signupAuth = asyncHandler(async (req, res, next)=>{
         }catch (e){
             console.log(e)
             res.status(401).send("not Authorised")
+            console.log("happy dhanteras")
         }
-    }
+    }   
     if(!extrackingJWT){
         res.status(401).send("no token")
     }

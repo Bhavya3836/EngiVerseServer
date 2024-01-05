@@ -1,6 +1,6 @@
 const {Schema,model} = require('mongoose')
 
-module.exports.productmodel = model('productamodel',Schema({
+module.exports.productmodel = model('productmodel',Schema({
     productName : {
         type:String,
         required:true
@@ -14,15 +14,20 @@ module.exports.productmodel = model('productamodel',Schema({
         required:true
     },
     productRating : {
-        type:String,
-        required:true
-    },
+        rating:[{
+            userid:{
+                type:Schema.Types.ObjectId,
+                ref:"signupmodel"
+            },
+            ANS:[{}]
+        }]
+    },          
     productCat : {
         type:String,
         required:true
     },
-    productImage : {
-        type:String,
-        required:true
-    }
+    // productImage : {
+    //     type:String,
+    //     required:false
+    // }
 },{timestamps:true}))

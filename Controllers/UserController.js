@@ -6,6 +6,7 @@ const otpGenerator = require("otp-generator")
 const jwt = require('jsonwebtoken')
 
 
+
 const generateToken = (id) =>{
     return jwt.sign({id},process.env.Skey )
 }
