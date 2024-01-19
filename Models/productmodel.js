@@ -5,6 +5,10 @@ module.exports.productmodel = model('productmodel',Schema({
         type:String,
         required:true
     },
+    productQuantity: {
+        type : String,
+        required: true
+    },
     productPrice : {
         type:String,
         required:true

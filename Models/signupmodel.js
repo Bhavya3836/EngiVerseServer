@@ -5,6 +5,10 @@ module.exports.signupmodel = model('signupmodel',Schema({
         type:String,
         required:true
     },
+    email : {
+        type:String,
+        required:true
+    },
     lastName : {
         type:String,
         required:true
@@ -28,6 +32,13 @@ module.exports.signupmodel = model('signupmodel',Schema({
     dob :{
         type : Date ,
         required :true
+    },
+    engineerType1: {
+        type : String,
+        required :true
+    },
+    engineerType2 : {
+        type : String
     }
 
    

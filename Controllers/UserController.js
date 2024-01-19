@@ -107,13 +107,14 @@ module.exports.signUp = async(req,res)=>{
         const data = req.body
         const modelStore = new signupmodel({
             firstName:data.fName,
+            email:data.mail,
             lastName:data.lName,
             phNumber:data.phone,
             password:data.password,
             userName:data.userName,
             dob:data.dob,
-            gender:data.gender
-
+            gender:data.gender,
+            engineerType1:data.e1
         })
         console.log(data)
         await modelStore.save()

@@ -21,6 +21,7 @@ module.exports.productAdd = async(req,res)=>{
             productName : data.pName,
             productPrice : data.pPrice, 
             productDesc: data.pDesc,
+            productQuantity : data.pquant,
             productCat : data.pCat,
             //productImage : imageName
         })
@@ -38,8 +39,7 @@ module.exports.productShow = async(req,res)=>{
     try{
         const data = req.body
         const temp = await productmodel.find()
-        console.log(temp)
-        res.json({message:"Successphool"})
+        res.json({message:"Successphool",data:temp})
     }
     catch(e){
         console.log(e)
