@@ -33,3 +33,17 @@ module.exports.productAdd = async(req,res)=>{
         res.json({error:e,message:e.message})
     }
 }
+
+module.exports.productShow = async(req,res)=>{
+    try{
+        const data = req.body
+        const temp = await productmodel.find()
+        console.log(temp)
+        res.json({message:"Successphool"})
+    }
+    catch(e){
+        console.log(e)
+        res.json({error:e,message:e.message})
+    }
+
+}

@@ -1,5 +1,6 @@
 const router = require("express").Router()
 const {productAdd} = require("../Controllers/AdminController/ecomAdmin")
+const {productShow} = require("../Controllers/AdminController/ecomAdmin")
 
 // const multer = require("multer")
 
@@ -17,6 +18,7 @@ const {productAdd} = require("../Controllers/AdminController/ecomAdmin")
 
 //router.route('/product').post(productAdd,upload.single("image"))
 router.route('/product').post(productAdd)
+router.route('/productShow').post(productShow)
 
 
 
