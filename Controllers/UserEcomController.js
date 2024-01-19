@@ -39,14 +39,29 @@ module.exports.catFilter = async(req,res)=>{
 }
 
 
-module.exports.proudctReq = async(req,res)=>{
+module.exports.shoppingCart = async(req,res)=>{
     try{
-        const data = productmodel.find()
-        res.send(data).status(200).json({message:"Uploaded"})
+        const id = req.params.id
+        const extrackingJWT = req.headers.authorization.split(' ')[1]
+        const decoded = jwt.verify(extrackingJWT,process.env.Skey,'' ,false)
+        const userId = decoded._id
+
 
     }
     catch(e){
-        console.log(e)
+
+    }
+}
+
+module.exports.singleProductDetail = async(req,res)=>{
+    try{
+        const id = req.params.id
+        const temp = await productmodel.findById(id)
+        console.log(temp)
+        res.json({message:"Displayed",data:temp})
+    }
+    catch(e){
+        res.json({error:e,message:e.message})
     }
 }
 
