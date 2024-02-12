@@ -106,3 +106,12 @@ module.exports.crtGroupChat = asyncHandler(async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 })
+
+// module.exports.Comunity = asyncHandler(req,res => {
+//   try{
+
+//   }
+//   catch{
+//     res.status(400)
+//   }
+// })
