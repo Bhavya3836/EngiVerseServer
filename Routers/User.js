@@ -12,6 +12,8 @@ const {accessChat} = require("../Controllers/textControllers/chatController")
 const {fetchChats} = require("../Controllers/textControllers/chatController")
 const {crtGroupChat} = require("../Controllers/textControllers/chatController")
 const {messageSendBody} = require("../Controllers/textControllers/msgController")
+const {messageGetBody} = require("../Controllers/textControllers/msgController")
+
 
 
 
@@ -27,9 +29,10 @@ router.route("/catFilter").post(catFilter)
 
 router.route("/accessChat").post(accessChat)
 router.route("/fetchChat").get(fetchChats)
-router.route("/crtgroup").get(crtGroupChat)
-router.route("/sendMsg").post(messageSendBody)          
+router.route("/crtgroup").get(crtGroupChat)      
 router.route("/productDesc").post(singleProductDetail)
+router.route("/sendMsg/:id").post(messageSendBody)
+router.route("/getMsg/:id").post(messageGetBody)
 
 
 module.exports = router

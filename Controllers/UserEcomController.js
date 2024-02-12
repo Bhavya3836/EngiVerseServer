@@ -57,7 +57,7 @@ module.exports.singleProductDetail = async(req,res)=>{
     try{
         const id = req.params.id
         const temp = await productmodel.findById(id)
-        console.log(temp)
+        console.log("Hello");
         res.json({message:"Displayed",data:temp})
     }
     catch(e){

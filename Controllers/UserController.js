@@ -54,6 +54,7 @@ module.exports.otp = async(req,res)=>{
 
             const final = await otp.save()
             return res.send("Mahesh Dalle"+OTP)
+
     }
     catch (e){
         console.log(e)
