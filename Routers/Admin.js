@@ -2,6 +2,7 @@ const router = require("express").Router()
 const {productAdd} = require("../Controllers/AdminController/ecomAdmin")
 const {productShow} = require("../Controllers/AdminController/ecomAdmin")
 const {adminHackathon} = require("../Controllers/AdminController/chatAdmin")
+const {createCommunity} = require("../Controllers/textControllers/communityController")
 
 // const multer = require("multer")
 
@@ -22,6 +23,8 @@ router.route('/product').post(productAdd)
 router.route('/productShow').post(productShow)
 router.route('/addHackathon').post(adminHackathon)
 
+//community routes
+router.route('/addCommunity').post(createCommunity)
 
 
 module.exports = router

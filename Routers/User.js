@@ -13,6 +13,9 @@ const {fetchChats} = require("../Controllers/textControllers/chatController")
 const {crtGroupChat} = require("../Controllers/textControllers/chatController")
 const {messageSendBody} = require("../Controllers/textControllers/msgController")
 const {messageGetBody} = require("../Controllers/textControllers/msgController")
+const {getHackathon} = require("../Controllers/textControllers/communityController")
+const {sendBroadcast} = require("../Controllers/textControllers/communityController")
+const {getCommuntities} = require("../Controllers/textControllers/communityController")
 
 
 
@@ -26,13 +29,17 @@ router.route("/profile").get(loginAuth,zinSakai)
 router.route("/verify").post(verifyOtp)
 router.route("/search").post(searchBar)
 router.route("/catFilter").post(catFilter)
-
 router.route("/accessChat").post(accessChat)
 router.route("/fetchChat").get(fetchChats)
 router.route("/crtgroup").get(crtGroupChat)      
 router.route("/productDesc").post(singleProductDetail)
 router.route("/sendMsg/:id").post(messageSendBody)
 router.route("/getMsg/:id").post(messageGetBody)
+router.route("/getHackathon").post(getHackathon)
+router.route("/sendBroadcast/:id").post(sendBroadcast)
+
+//community routes
+router.route("/getCommunity").post(getCommuntities)
 
 
 module.exports = router

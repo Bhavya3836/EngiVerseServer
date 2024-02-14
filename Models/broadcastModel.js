@@ -10,9 +10,10 @@ module.exports.broadcastModel = model('broadcastModel',Schema({
        type:String,
        required:true
    },
-   commnunityId:{
-       type:Schema.Types.ObjectId
-   },
+   commnunityId:[{
+       type:Schema.Types.ObjectId,
+       ref:"communityModel"
+   }],
    requirments:{
        type:String,
        required:true

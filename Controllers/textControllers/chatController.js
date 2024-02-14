@@ -97,7 +97,7 @@ module.exports.crtGroupChat = asyncHandler(async (req, res) => {
       users: userIds.map((id) => id),
     };
     console.log(chatData)
-    const createdChat = await chatModel.create(chatData);
+    const createdChat = await chatModel.create(chatData)
     const fullChat = await chatModel.findOne({ _id: createdChat._id })
       .populate("users", "-password");
 
@@ -106,6 +106,8 @@ module.exports.crtGroupChat = asyncHandler(async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 })
+
+
 
 // module.exports.Comunity = asyncHandler(req,res => {
 //   try{

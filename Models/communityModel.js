@@ -6,6 +6,10 @@ module.exports.communityModel = model('communityModel',Schema({
         type:String,
         required:true
     },
+    genralChat:{
+        type:Schema.Types.ObjectId,
+        ref: 'chatModel'
+    },
     users:[{
         type:Schema.Types.ObjectId,
         ref: 'signupmodel'
@@ -19,10 +23,7 @@ module.exports.communityModel = model('communityModel',Schema({
         ref: 'polsModel'
     }],
     introduction:{
-        type:String
-    },
-    broadcastForCollab:[{
-        type:Schema.Types.ObjectId,
-        ref: 'broadcastModel'
-    }]
+        type:String,
+        required:true
+    }
 },{timestamps:true}))

@@ -40,7 +40,4 @@ module.exports.signupmodel = model('signupmodel',Schema({
     engineerType2 : {
         type : String
     }
-
-   
-    
 }))

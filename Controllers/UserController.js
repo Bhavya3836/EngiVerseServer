@@ -2,8 +2,11 @@ const {loginmodel} = require("../Models/loginmodel")
 const {otpmodel} = require("../Models/otpmodel")
 const {signupmodel} = require("../Models/signupmodel")
 const {tempNumModel} = require("../Models/tempNumStoringModel")
+const {communityModel} = require("../Models/communityModel")
+
 const otpGenerator = require("otp-generator")
 const jwt = require('jsonwebtoken')
+const {chatModel} = require("../Models/chatModel");
 
 
 
@@ -102,31 +105,38 @@ module.exports.verifyOtp = async(req,res)=>{
     }
     
 }
-
-module.exports.signUp = async(req,res)=>{
-    try{
-        const data = req.body
+module.exports.signUp = async (req, res) => {
+    try {
+        const data = req.body;
         const modelStore = new signupmodel({
-            firstName:data.fName,
-            email:data.mail,
-            lastName:data.lName,
-            phNumber:data.phone,
-            password:data.password,
-            userName:data.userName,
-            dob:data.dob,
-            gender:data.gender,
-            engineerType1:data.e1
-        })
-        console.log(data)
-        await modelStore.save()
-        res.json({message:"Sign Up Done!!"})
-    }
-    catch(e){
-        // console.log(e)
-        res.status(300).json({error:e,message:e.message})
-    }
-}   
+            firstName: data.fName,
+            email: data.mail,
+            lastName: data.lName,
+            phNumber: data.phone,
+            password: data.password,
+            userName: data.userName,
+            dob: data.dob,
+            gender: data.gender,
+            engineerType1: data.e1
+        });
 
+        await modelStore.save();
+
+        const pljWork = await communityModel.find({name:data.e1})
+
+        const updatedCommunity = await communityModel.findOneAndUpdate(
+            { name: data.e1 },
+            { $push: { users: modelStore._id } },
+            { new: true }
+        )
+        const updatedChat = await chatModel.findByIdAndUpdate(pljWork[0].genralChat,{ $push: { users: modelStore._id } },{ new: true })
+
+        res.json({ message: "Sign Up Done!!" })
+    } catch (e) {
+        console.error('Error:', e)
+        res.status(300).json({ error: e, message: e.message })
+    }
+}
 
 module.exports.zinSakai = async(req,res)=>{
     try{
