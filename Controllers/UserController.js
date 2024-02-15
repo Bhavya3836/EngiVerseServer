@@ -20,8 +20,7 @@ module.exports.Login = async(req,res)=>{
         const user = await signupmodel.findOne({userName:data.userName})
         if((user.userName === data.userName) && (user.password === data.password)){
             console.log("Welcome to goa singham")
-            const temp = await communityModel.find({ users: { $elemMatch: { $eq: user.id } } })
-            res.status(200).json({message:"User Found",_id:user.id,userName:user.userName,token:generateToken(user._id),data:temp})
+            res.status(200).json({message:"User Found",_id:user.id,userName:user.userName,token:generateToken(user._id)})
         }
         else{
             res.status(400).send("Incorrect UserName of password")
@@ -30,6 +29,21 @@ module.exports.Login = async(req,res)=>{
     }
     catch(e){   
         console.log(e)
+    }
+}
+
+
+module.exports.showEtype = async(req,res) =>{
+    try{
+        const extrackingJWT = req.headers.authorization.split(' ')[1]
+        const decoded = jwt.verify(extrackingJWT,process.env.Skey,'' ,false)
+        const id = decoded.id
+
+        const temp = await communityModel.find({ users: { $elemMatch: { $eq:id } } })
+        res.status(200).json({orgy:temp})
+    }
+    catch(e){
+        res.status(400).json({error:e,message:e.message})
     }
 }
 
