@@ -17,6 +17,7 @@ const {getHackathon} = require("../Controllers/textControllers/communityControll
 const {sendBroadcast} = require("../Controllers/textControllers/communityController")
 const {getCommuntities} = require("../Controllers/textControllers/communityController")
 const {getBroadcast} = require("../Controllers/textControllers/communityController")
+const {showEtype} = require("../Controllers/UserController")
 
 
 
@@ -39,6 +40,7 @@ router.route("/getMsg/:id").post(messageGetBody)
 router.route("/getHackathon").post(getHackathon)
 router.route("/sendBroadcast/:id").post(sendBroadcast)
 router.route("/getBroadcast").post(getBroadcast)
+router.route("/showEtype").post(showEtype)
 
 //community routes
 router.route("/getCommunity").post(getCommuntities)
