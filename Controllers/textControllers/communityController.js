@@ -21,12 +21,12 @@ module.exports.getHackathon = async(req,res)=>{
 
 module.exports.createCommunity = async(req,res)=>{
     try{
-        const {communityName,introduction} = req.body
+        const {communityName,introduction,descr} = req.body
 //        const extractingJWT = req.headers.authorization.split(' ')[1];
 //        const decoded = jwt.verify(extractingJWT, process.env.Skey, '', false);
         const exists = await communityModel.find({name:communityName})
         if(exists.length!==0){
-            res.send({status:500,message:"LAVDEEE ALREADY EXISTS"})
+            res.send({status:500,message:"Communiry ALREADY EXISTS"})
         }
         const chatData = {
             chatName: communityName+"GenralChat",
@@ -36,7 +36,7 @@ module.exports.createCommunity = async(req,res)=>{
         console.log(chatData)
         const createdChat = await chatModel.create(chatData)
         
-        const data = await new communityModel({name:communityName,introduction:introduction,genralChat:createdChat._id})
+        const data = await new communityModel({name:communityName,introduction:introduction,desc:descr,genralChat:createdChat._id})
         await data.save()
         
         
@@ -94,4 +94,13 @@ module.exports.sendBroadcast = async(req,res)=>{
       console.log(e)
       res.json({error:e,message:e.message})
   }
+}
+
+module.exports.getBroadcast = async(req,res) =>{
+    try{
+
+    }
+    catch{
+
+    }
 }

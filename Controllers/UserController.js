@@ -20,7 +20,8 @@ module.exports.Login = async(req,res)=>{
         const user = await signupmodel.findOne({userName:data.userName})
         if((user.userName === data.userName) && (user.password === data.password)){
             console.log("Welcome to goa singham")
-            res.status(200).json({message:"User Found",_id:user.id,userName:user.userName,token:generateToken(user._id)})
+            const temp = await communityModel.find({ users: { $elemMatch: { $eq: user.id } } })
+            res.status(200).json({message:"User Found",_id:user.id,userName:user.userName,token:generateToken(user._id),data:temp})
         }
         else{
             res.status(400).send("Incorrect UserName of password")

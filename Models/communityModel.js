@@ -25,5 +25,9 @@ module.exports.communityModel = model('communityModel',Schema({
     introduction:{
         type:String,
         required:true
+    },
+    desc:{
+        type:String,
+        required:true
     }
 },{timestamps:true}))
