@@ -19,6 +19,7 @@ const {getCommuntities} = require("../Controllers/textControllers/communityContr
 const {getBroadcast} = require("../Controllers/textControllers/communityController")
 const {showEtype} = require("../Controllers/UserController")
 const {joinComunity} = require("../Controllers/textControllers/communityController")
+const {leaveComm} = require("../Controllers/textControllers/communityController")
 
 
 
@@ -47,6 +48,7 @@ router.route("/joinComunity/:id").post(joinComunity)
 router.route("/getCommunity").post(getCommuntities)
 router.route("/showEtype").post(showEtype)
 router.route("/getOneCummunity/:id").post(showEtype)
+router.route("/leaveComm/:id").post(leaveComm)
 
 
 module.exports = router

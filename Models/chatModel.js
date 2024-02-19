@@ -18,5 +18,12 @@ module.exports.chatModel = model('chatModel',Schema({
         type:Boolean,
         require:true
     },
-    groupAdmin: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
+    groupAdmin: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    desc:{
+        type:String,
+
+    },
+    type:{
+        type:String
+    }
 },{timestamps:true}))

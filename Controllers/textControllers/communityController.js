@@ -128,3 +128,21 @@ module.exports.joinComunity = async(req,res) =>{
         res.status(400).json({error:e,message:e.error})
     }
 }
+
+
+module.exports.leaveComm = asyncHandler(async (req, res) => {
+    try{
+      const extrackingJWT = req.headers.authorization.split(' ')[1]
+      const decoded = jwt.verify(extrackingJWT,process.env.Skey,'' ,false)
+      const uId = decoded.id
+      
+          const {id} = req.params
+          console.log(id)
+          const temp = await communityModel.findByIdAndUpdate(id,{ $pull: { users: uId } },{new:true})
+          res.status(200).json({message:temp})
+    }
+    catch(e){
+      console.log(e)
+      res.status(400).json({error:e,message:e.error})
+    }
+  })

@@ -81,7 +81,7 @@ module.exports.fetchChats = asyncHandler(async (req, res) => {
 })
 
 module.exports.crtGroupChat = asyncHandler(async (req, res) => {
-  const { userIds, chatName } = req.body;
+  const { userIds, chatName, chatDesc,chatType } = req.body;
   const extractingJWT = req.headers.authorization.split(' ')[1];
 
   try {
@@ -91,6 +91,9 @@ module.exports.crtGroupChat = asyncHandler(async (req, res) => {
       return res.sendStatus(400);
     }
     const chatData = {
+
+      desc:chatDesc,
+      type:chatType,
       chatName: chatName,
       isGroupChat: true,
       groupAdmin:decoded.id,
@@ -104,6 +107,23 @@ module.exports.crtGroupChat = asyncHandler(async (req, res) => {
     res.status(200).json(fullChat);
   } catch (error) {
     res.status(400).json({ error: error.message });
+  }
+})
+
+module.exports.leaveGrp = asyncHandler(async (req, res) => {
+  try{
+    const extrackingJWT = req.headers.authorization.split(' ')[1]
+    const decoded = jwt.verify(extrackingJWT,process.env.Skey,'' ,false)
+    const uId = decoded.id
+    
+        const {id} = req.params
+        console.log(id)
+        const temp = await chatModel.findByIdAndUpdate(id,{ $pull: { users: uId } },{new:true})
+        res.status(200).json({message:temp})
+  }
+  catch(e){
+    console.log(e)
+    res.status(400).json({error:e,message:e.error})
   }
 })
 
