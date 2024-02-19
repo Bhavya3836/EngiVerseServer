@@ -55,7 +55,7 @@ module.exports.messageGetBody = asyncHandler(async (req, res) => {
         let modifiedMsgs = [];
         for (const NewMsg of msgs) {
             const id = NewMsg.sender;
-            let modifiedMsg;
+            let modifiedMsg
             if (id == temp1.id) {
                 const userData = await signupmodel.findById(id, "firstName lastName engineerType1");
                 modifiedMsg = { ...NewMsg._doc, ...userData._doc, status: true };

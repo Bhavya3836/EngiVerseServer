@@ -22,6 +22,10 @@ const {joinComunity} = require("../Controllers/textControllers/communityControll
 const {leaveComm} = require("../Controllers/textControllers/communityController")
 const {leaveGrp} = require("../Controllers/textControllers/chatController")
 const {getGrp} = require("../Controllers/textControllers/chatController")
+const {createPolls} = require("../Controllers/pollController")
+const {pollVote} = require("../Controllers/pollController")
+const {getAllPolls} = require("../Controllers/pollController")
+const {getMyPolls} = require("../Controllers/pollController")
 
 
 
@@ -46,6 +50,10 @@ router.route("/sendBroadcast").post(sendBroadcast)
 router.route("/getBroadcast").post(getBroadcast)
 router.route("/leaveGrp").post(leaveGrp)
 router.route("/showGrp").post(getGrp)
+router.route("/createPolls").post(createPolls)
+router.route("/pollVote/:pId/:oId").post(pollVote)
+router.route("/getAllPolls/:id").get(getAllPolls)
+router.route("/getMyPolls/:id").get(getMyPolls)
 //community routes
 router.route("/joinComunity/:id").post(joinComunity)
 router.route("/getCommunity").post(getCommuntities)
