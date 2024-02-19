@@ -47,6 +47,17 @@ module.exports.showEtype = async(req,res) =>{
     }
 }
 
+module.exports.getOneCommunity = async(req,res) =>{
+    try{
+        const {id} = req.params.id
+
+        const temp = await communityModel.findById(id)
+        res.status(200).json({orgy:temp})
+    }
+    catch(e){
+        res.status(400).json({error:e,message:e.message})
+    }
+}
 
 module.exports.otp = async(req,res)=>{
     try{

@@ -10,8 +10,9 @@ const {chatModel} = require("../../Models/chatModel")
 
 module.exports.getHackathon = async(req,res)=>{
     try{
-        const data = req.body
-        const temp = await productmodel.find()
+        const data = req.body   
+        
+        const temp = await hackathonModel.find()
         res.json({message:"Hackathon added Successfull",data:temp})    
     }
   catch(e){
@@ -62,27 +63,26 @@ module.exports.getCommuntities = async(req,res)=>{
 
 module.exports.sendBroadcast = async(req,res)=>{
   try{
-      const {id} = req.params
       const data = req.body 
       const token = req.headers.authorization.split(' ')[1];
       const temp1 = jwt.verify(token, process.env.Skey, '', false);
 
-      if(!id)
-      {
-          res.send("Not Found User").status(404)
-      }
+    //   if(!id)
+    //   {
+    //       res.send("Not Found User").status(404)
+    //   }
       if(!data)
       {
         res.send("Data Not Found").status(404)
       }
 
-
+      console.log(data)
       const modelStore = new broadcastModel({
         user:temp1.id,
         context:data.context,
-        commnunityId:id,
+        commnunityId:"65cbc99b551a2594389c88a2",
         requirments:data.require,
-        finance:data.fin
+        finance:data.fin?data.fin:null
       });
 
       await modelStore.save()
@@ -97,10 +97,13 @@ module.exports.sendBroadcast = async(req,res)=>{
 }
 
 module.exports.getBroadcast = async(req,res) =>{
-    try{
-
+   try{
+    const data = req.body
+    const temp = await broadcastModel.find().populate("user")
+    res.json({message:"Broadcassst succussfully shown",data:temp})
     }
-    catch{
-
+    catch(e){
+        console.log(e)
+        res.status(400).json({error:e,message:e.message})
     }
 }

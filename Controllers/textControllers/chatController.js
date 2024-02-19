@@ -8,10 +8,10 @@ const {chatModel} = require("../../Models/chatModel")
 
 
 module.exports.accessChat = asyncHandler(async (req, res) => {
-    const { userId } = req.body;
+    const { id } = req.params
     const extrackingJWT = req.headers.authorization.split(' ')[1]
     const decoded = jwt.verify(extrackingJWT,process.env.Skey,'' ,false)
-    if (!userId) {
+    if (!id) {
       console.log("Userid not sent");
       return res.sendStatus(400);
     }
@@ -20,7 +20,7 @@ module.exports.accessChat = asyncHandler(async (req, res) => {
       isGroupChat: false,
       $and: [
         { users: { $elemMatch: { $eq: decoded.id } } },
-        { users: { $elemMatch: { $eq: userId } } },
+        { users: { $elemMatch: { $eq: id } } },
       ],
     })
       .populate("users", "-password")
@@ -37,7 +37,7 @@ module.exports.accessChat = asyncHandler(async (req, res) => {
       var chatData = {
         chatName: "sender",
         isGroupChat: false,
-        users: [decoded.id, userId],
+        users: [decoded.id, id],
       };
   
       try {

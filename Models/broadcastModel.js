@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 module.exports.broadcastModel = model('broadcastModel',Schema({
    user:{
        type:Schema.Types.ObjectId,
+       ref:"signupmodel",
        required:true
    },
    context:{

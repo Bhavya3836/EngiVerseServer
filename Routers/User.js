@@ -31,19 +31,20 @@ router.route("/profile").get(loginAuth,zinSakai)
 router.route("/verify").post(verifyOtp)
 router.route("/search").post(searchBar)
 router.route("/catFilter").post(catFilter)
-router.route("/accessChat").post(accessChat)
+router.route("/accessChat/:id").post(accessChat)
 router.route("/fetchChat").get(fetchChats)
 router.route("/crtgroup").get(crtGroupChat)      
 router.route("/productDesc").post(singleProductDetail)
 router.route("/sendMsg/:id").post(messageSendBody)
 router.route("/getMsg/:id").post(messageGetBody)
 router.route("/getHackathon").post(getHackathon)
-router.route("/sendBroadcast/:id").post(sendBroadcast)
+router.route("/sendBroadcast").post(sendBroadcast)
 router.route("/getBroadcast").post(getBroadcast)
-router.route("/showEtype").post(showEtype)
 
 //community routes
 router.route("/getCommunity").post(getCommuntities)
+router.route("/showEtype").post(showEtype)
+router.route("/getOneCummunity/:id").post(showEtype)
 
 
 module.exports = router
