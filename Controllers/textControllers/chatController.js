@@ -155,6 +155,24 @@ module.exports.joinGrp = async(req,res) =>{
 }
 
 
+module.exports.getGrp = async(req,res)=>{
+  try{
+    const extrackingJWT = req.headers.authorization.split(' ')[1]
+    const decoded = jwt.verify(extrackingJWT,process.env.Skey,'' ,false)
+    const id = decoded.id
+    
+
+    const temp = await chatModel.find({ users: { $elemMatch: { $eq:id } } ,isGroupChat:true})
+    res.status(200).json({orgy:temp})
+      
+
+  }
+catch(e){
+      console.log(e)
+  }
+}
+
+
 
 // module.exports.Comunity = asyncHandler(req,res => {
 //   try{
