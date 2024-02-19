@@ -127,6 +127,33 @@ module.exports.leaveGrp = asyncHandler(async (req, res) => {
   }
 })
 
+module.exports.joinGrp = async(req,res) =>{
+  try{
+      const extrackingJWT = req.headers.authorization.split(' ')[1]
+      const decoded = jwt.verify(extrackingJWT,process.env.Skey,'' ,false)
+      const uId = decoded.id
+
+      const {id} = req.params
+      const user = await communityModel.findById(id)
+      console.log(user)
+      const exist = user.users.includes(uId)
+      console.log(exist)
+
+      if(!exist){
+        const temp = await chatModel.findByIdAndUpdate(id,{ $push: { users: uId } },{new:true})
+        res.status(200).json({message:temp})
+      }
+      else{
+        res.status(404).json({message:"User exist"})
+      }
+   
+  }
+  catch(e){
+      console.log(e)
+      res.status(400).json({error:e,message:e.error})
+  }
+}
+
 
 
 // module.exports.Comunity = asyncHandler(req,res => {

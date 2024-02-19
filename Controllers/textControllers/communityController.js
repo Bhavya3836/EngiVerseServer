@@ -116,11 +116,21 @@ module.exports.joinComunity = async(req,res) =>{
         const uId = decoded.id
 
         const {id} = req.params
-        console.log(id)
-        const temp = await communityModel.findByIdAndUpdate(id,{ $push: { users: uId } },{new:true})
+        const user = await communityModel.findById(id)
+        console.log(user)
+        const exist = user.users.includes(uId)
+        console.log(exist)
+        if(!exist){
+            console.log(id)
+            const temp = await communityModel.findByIdAndUpdate(id,{ $push: { users: uId } },{new:true})
 
+            res.status(200).json({message:temp})
 
-        res.status(200).json({message:temp})
+        }
+        else{
+            res.status(404).json({message:"Jai Shree Krisna"})
+            console.log("User already belongs to the community")
+        }
      
     }
     catch(e){

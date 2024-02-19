@@ -20,6 +20,7 @@ const {getBroadcast} = require("../Controllers/textControllers/communityControll
 const {showEtype} = require("../Controllers/UserController")
 const {joinComunity} = require("../Controllers/textControllers/communityController")
 const {leaveComm} = require("../Controllers/textControllers/communityController")
+const {leaveGrp} = require("../Controllers/textControllers/chatController")
 
 
 
@@ -42,7 +43,7 @@ router.route("/getMsg/:id").post(messageGetBody)
 router.route("/getHackathon").post(getHackathon)
 router.route("/sendBroadcast").post(sendBroadcast)
 router.route("/getBroadcast").post(getBroadcast)
-
+router.route("/leaveGrp").post(leaveGrp)
 //community routes
 router.route("/joinComunity/:id").post(joinComunity)
 router.route("/getCommunity").post(getCommuntities)
