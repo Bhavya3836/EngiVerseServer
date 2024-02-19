@@ -31,15 +31,23 @@ module.exports.pollVote = async(req,res)=>{
         const voterID = decoded.id
         const pollId = req.params.pId
         const optionId = req.params.oId
+        const temp = await polsModel.findById(pollId)
+        const exist = await temp.optionId.includes(voterID)
 
-        const newVote = await polsModel.findOneAndUpdate(
-        {_id:pollId,'options._id':optionId},
-        {$addToSet:{'options.$.selected':voterID}},
-        {new:true}
-        )
+        if(!exist){
 
-        console.log(newVote,req.params)
+            const newVote = await polsModel.findOneAndUpdate(
+                {_id:pollId,'options._id':optionId},
+                {$addToSet:{'options.$.selected':voterID}},
+                {new:true}
+            )
+        }
+        else{
+            console.log(newVote,req.params)
         res.status(200).json({ message: 'Vote added successfully', poll: newVote })
+        }
+
+        
 
 
     }catch(error){
