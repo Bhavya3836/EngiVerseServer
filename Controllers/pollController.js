@@ -24,38 +24,46 @@ module.exports.createPolls = async(req,res)=>{
     }
 }
 
-module.exports.pollVote = async(req,res)=>{
-    try{
-        const extrackingJWT = req.headers.authorization.split(' ')[1]
-        const decoded = jwt.verify(extrackingJWT,process.env.Skey,'' ,false)
-        const voterID = decoded.id
-        const pollId = req.params.pId
-        const optionId = req.params.oId
-        const temp = await polsModel.findById(pollId)
-        const exist = await temp.optionId.includes(voterID)
+module.exports.pollVote = async (req, res) => {
+    try {
+        const extractedJWT = req.headers.authorization.split(' ')[1];
+        const decoded = jwt.verify(extractedJWT, process.env.Skey);
+        const voterID = decoded.id;
+        const pollId = req.params.pId;
+        const optionId = req.params.oId;
 
-        if(!exist){
+        const poll = await polsModel.findById(pollId);
 
-            const newVote = await polsModel.findOneAndUpdate(
-                {_id:pollId,'options._id':optionId},
-                {$addToSet:{'options.$.selected':voterID}},
-                {new:true}
-            )
-        }
-        else{
-            console.log(newVote,req.params)
-        res.status(200).json({ message: 'Vote added successfully', poll: newVote })
+        const selectedOption = poll.options.find(option => option._id.equals(optionId));
+
+        if (!selectedOption) {
+            return res.status(404).json({ message: 'Option not found' });
         }
 
-        
+        const hasVotedForOption = selectedOption.selected.includes(voterID);
 
+        if (hasVotedForOption) {
+            selectedOption.selected = selectedOption.selected.filter(selectedId => !selectedId.equals(voterID));
+            await poll.save();
+            return res.status(200).json({ message: 'Vote removed successfully', poll });
+        }
 
-    }catch(error){
-        console.log('Error voting: ', error)
+        const previousOption = poll.options.find(option => option.selected.includes(voterID));
+
+        if (previousOption) {
+            previousOption.selected = previousOption.selected.filter(selectedId => !selectedId.equals(voterID));
+        }
+
+        selectedOption.selected.push(voterID);
+
+        await poll.save();
+
+        res.status(200).json({ message: 'Vote added successfully', poll });
+    } catch (error) {
+        console.log('Error voting: ', error);
         res.status(500).json({ message: 'Internal server error' });
     }
 }
-
 
 module.exports.getAllPolls = async(req,res)=>{
     try{

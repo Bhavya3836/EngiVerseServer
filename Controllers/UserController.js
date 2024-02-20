@@ -91,6 +91,15 @@ module.exports.otp = async(req,res)=>{
     }
 }
 
+module.exports.getDp = async(req,res) =>{
+    try{
+
+    }
+    catch(e){
+          res.status(400).json({error:e,message:e.message})
+    }
+}
+
 module.exports.verifyOtp = async(req,res)=>{
     try
     {
