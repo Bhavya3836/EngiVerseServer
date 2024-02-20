@@ -143,7 +143,8 @@ module.exports.signUp = async (req, res) => {
             userName: data.userName,
             dob: data.dob,
             gender: data.gender,
-            engineerType1: data.e1
+            engineerType1: data.e1,
+            profilePicture :data.profilePicture
         });
 
         await modelStore.save();
@@ -161,6 +162,25 @@ module.exports.signUp = async (req, res) => {
     } catch (e) {
         console.error('Error:', e)
         res.status(300).json({ error: e, message: e.message })
+    }
+}
+
+module.exports.changDp = async(req,res)=>{
+    try{
+        const extrackingJWT = req.headers.authorization.split(' ')[1]
+        const decoded = jwt.verify(extrackingJWT,process.env.Skey,'' ,false)
+        const id = decoded.id
+        const temp = req.params.id
+
+
+        const updateUser = await signupmodel.findByIdAndUpdate(id,{profilePicture:temp})
+
+        res.status(200).json({data:updateUser})
+
+        
+    }
+    catch(e){
+        res.status(400).json({error:e,message:e.message})
     }
 }
 

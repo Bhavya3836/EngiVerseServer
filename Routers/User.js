@@ -26,7 +26,7 @@ const {createPolls} = require("../Controllers/pollController")
 const {pollVote} = require("../Controllers/pollController")
 const {getAllPolls} = require("../Controllers/pollController")
 const {getMyPolls} = require("../Controllers/pollController")
-
+const {changDp} = require("../Controllers/UserController")
 
 
 
@@ -53,7 +53,9 @@ router.route("/showGrp").post(getGrp)
 router.route("/createPolls").post(createPolls)
 router.route("/pollVote/:pId/:oId").post(pollVote)
 router.route("/getAllPolls/:id").get(getAllPolls)
+router.route("/changDp/:id").post(changDp)
 router.route("/getMyPolls/:id").get(getMyPolls)
+
 //community routes
 router.route("/joinComunity/:id").post(joinComunity)
 router.route("/getCommunity").post(getCommuntities)
