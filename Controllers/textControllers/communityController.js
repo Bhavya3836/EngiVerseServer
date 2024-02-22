@@ -156,3 +156,14 @@ module.exports.leaveComm = asyncHandler(async (req, res) => {
       res.status(400).json({error:e,message:e.error})
     }
   })
+
+  module.exports.getGeneralChat = asyncHandler(async (req,res) => {
+    try{
+        const id = req.params.id
+        const temp = chatModel.find(id)
+
+    }
+    catch(e){
+
+    }
+  })

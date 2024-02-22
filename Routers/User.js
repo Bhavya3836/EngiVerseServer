@@ -28,6 +28,7 @@ const {getAllPolls} = require("../Controllers/pollController")
 const {getMyPolls} = require("../Controllers/pollController")
 const {changDp} = require("../Controllers/UserController")
 const {getDp} = require("../Controllers/UserController")
+const {getGeneralChat} = require("../Controllers/textControllers/communityController")
 
 
 
@@ -58,12 +59,14 @@ router.route("/changDp/:id").post(changDp)
 router.route("/getMyPolls/:id").get(getMyPolls)
 router.route("/getDp").post(getDp)
 
+
 //community routes
 router.route("/joinComunity/:id").post(joinComunity)
 router.route("/getCommunity").post(getCommuntities)
 router.route("/showEtype").post(showEtype)
 router.route("/getOneCummunity/:id").post(showEtype)
 router.route("/leaveComm/:id").post(leaveComm)
+router.route("/getGeneralChat/:id").post(getGeneralChat)
 
 
 module.exports = router
