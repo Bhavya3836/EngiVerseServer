@@ -3,6 +3,7 @@ const {productAdd} = require("../Controllers/AdminController/ecomAdmin")
 const {productShow} = require("../Controllers/AdminController/ecomAdmin")
 const {adminHackathon} = require("../Controllers/AdminController/chatAdmin")
 const {createCommunity} = require("../Controllers/textControllers/communityController")
+const {adminLogin} = require("../Controllers/AdminController/adminController")
 
 // const multer = require("multer")
 
@@ -22,6 +23,7 @@ const {createCommunity} = require("../Controllers/textControllers/communityContr
 router.route('/product').post(productAdd)
 router.route('/productShow').post(productShow)
 router.route('/addHackathon').post(adminHackathon)
+router.route('/adminLogin').post(adminLogin)
 
 //community routes
 router.route('/addCommunity').post(createCommunity)
