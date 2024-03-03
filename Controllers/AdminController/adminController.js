@@ -1,7 +1,7 @@
 // const {loginmodel} = require("../Models/loginmodel")
 // const {otpmodel} = require("../Models/otpmodel")
 // const {signupmodel} = require("../Models/signupmodel")
-// const {communityModel} = require("../Models/communityModel")
+const {communityModel} = require("../../Models/communityModel")
 
 const jwt = require('jsonwebtoken')
 
@@ -30,5 +30,18 @@ module.exports.adminLogin = async(req,res)=>{
     }
     catch(e){   
         console.log(e)
+    }
+}
+
+
+module.exports.commLoop = async(req,res)=>{
+    try{
+        const temp = await communityModel.find()
+        res.json({message:"Successphool",data:temp})
+    }
+    catch(e)
+    {
+        console.log(e)
+        res.status(400).json({message:e.error,error:e})
     }
 }
