@@ -61,7 +61,7 @@ module.exports.fetchChats = asyncHandler(async (req, res) => {
       const id = decoded.id
       console.log(id)
       const result = await chatModel.find({ users: { $elemMatch: { $eq: decoded.id } }})
-          .populate({ path: 'users', select: 'firstName lastName profilePicture' })
+          .populate({ path: 'users', select: 'firstName lastName profilePicture engineerType1' })
           .populate("latestMessage")
           .sort({ updatedAt: -1 });
 

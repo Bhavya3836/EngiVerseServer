@@ -39,7 +39,9 @@ module.exports.showEtype = async(req,res) =>{
         const decoded = jwt.verify(extrackingJWT,process.env.Skey,'' ,false)
         const id = decoded.id
 
-        const temp = await communityModel.find({ users: { $elemMatch: { $eq:id } } })
+        const temp = await communityModel.find({ users: { $elemMatch: { $eq:id } } })       
+            .populate('users',"-password" )
+
         res.status(200).json({orgy:temp})
     }
     catch(e){
