@@ -9,12 +9,12 @@ const mongoose = require("mongoose")
 module.exports.messageSendBody = asyncHandler(async (req, res) => {
     try {
         const data = req.body.content;
-        const {id} = req.params;
+        const { id } = req.params;
         const token = req.headers.authorization.split(' ')[1];
         const temp1 = jwt.verify(token, process.env.Skey, '', false);
 
         if (!data || !id) {
-            return res.send("Moey Moey").status(404);
+            return res.status(404).send("Missing data or chat ID");
         }
 
         let createMsg = {
@@ -25,14 +25,17 @@ module.exports.messageSendBody = asyncHandler(async (req, res) => {
 
         console.log(createMsg);
 
-        let msg = await new msgModel(createMsg)
+        let msg = new msgModel(createMsg);
+        await msg.save();
+
         msg = await msg.populate("chat")
 
         await chatModel.findByIdAndUpdate(id, {
             latestMessage: msg
-        })
-        msg.save()
-        res.json(msg)
+        });
+
+        console.log(msg);
+        res.status(200).send({ message: "OK", data: msg });
     } catch (e) {
         console.log(e);
         res.status(500).send("Internal Server Error");

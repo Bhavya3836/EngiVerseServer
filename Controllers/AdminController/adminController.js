@@ -37,6 +37,7 @@ module.exports.adminLogin = async(req,res)=>{
 module.exports.commLoop = async(req,res)=>{
     try{
         const temp = await communityModel.find()
+        console.log(temp)
         res.json({message:"Successphool",data:temp})
     }
     catch(e)

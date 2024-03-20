@@ -91,13 +91,12 @@ module.exports.crtGroupChat = asyncHandler(async (req, res) => {
       return res.sendStatus(400);
     }
     const chatData = {
-
-      desc:chatDesc,
-      type:chatType,
+      desc: chatDesc,
+      type: chatType,
       chatName: chatName,
       isGroupChat: true,
-      groupAdmin:decoded.id,
-      users: userIds.map((id) => id),
+      groupAdmin: decoded.id,
+      users: [...userIds, decoded.id] 
     };
     console.log(chatData)
     const createdChat = await chatModel.create(chatData)
