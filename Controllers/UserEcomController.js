@@ -1,6 +1,8 @@
 const { productmodel } = require("../Models/productmodel")
 const {cartModel} = require("../Models/cartMode")
-
+const asyncHandler = require('express-async-handler')
+const expressAsyncHandler = require("express-async-handler")
+const jwt = require("jsonwebtoken")
 
 module.exports.searchBar = async(req,res)=>{
     try{
@@ -59,26 +61,40 @@ module.exports.singleProductDetail = async(req,res)=>{
     try{
         const id = req.params.id
         const temp = await productmodel.findById(id)
-        console.log("Hello");
+        console.log("Hello")
         res.json({message:"Displayed",data:temp})
     }
     catch(e){
         res.json({error:e,message:e.message})
     }
 }
+module.exports.addToCart = async (req, res) => {
+    try {
+        const extractingJWT = req.headers.authorization.split(' ')[1]
+        const decoded = jwt.verify(extractingJWT, process.env.Skey)
+        const userId = decoded.id
 
-module.exports.cart = async(req,res) =>{
-    try{
-        const extrackingJWT = req.headers.authorization.split(' ')[1]
-        const decoded = jwt.verify(extrackingJWT,process.env.Skey,'' ,false)
-        const uId = decoded.id
-
-        data = req.body
+        const data = req.body
         const product = await productmodel.findById(data.id)
 
-    }
-    catch(e){
-        res.json({error:e,message:e.message})
+        const cart = await cartModel.findOne({ user: userId })
+
+        if (!cart) {
+            const newCart = new cartModel({
+                user: userId,
+                product: [{ pName: data.pName, pCount: data.pCount }]
+            })
+            await newCart.save()
+            console.log(newCart)
+            res.json({ message: "Product added to cart successfully", cart: newCart })
+        } else {
+            await cartModel.findByIdAndUpdate(cart._id, { $push: { "product": { pName: data.id, pCount: data.pCount } } }, { new: true })
+            console.log("Product added to existing cart")
+            res.json({ message: "Product added to cart successfully", cart })
+        }
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ error: error.message })
     }
 }
 
