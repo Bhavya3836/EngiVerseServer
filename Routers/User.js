@@ -29,6 +29,8 @@ const {getMyPolls} = require("../Controllers/pollController")
 const {changDp} = require("../Controllers/UserController")
 const {getDp} = require("../Controllers/UserController")
 const {getGeneralChat} = require("../Controllers/textControllers/communityController")
+const {cart} = require("../Controllers/UserEcomController")
+
 
 
 
@@ -59,7 +61,7 @@ router.route("/getAllPolls/:id").get(getAllPolls)
 router.route("/changDp/:id").post(changDp)
 router.route("/getMyPolls/:id").get(getMyPolls)
 router.route("/getDp").post(getDp)
-
+router.route("/cart").post(cart)
 
 
 //community routes

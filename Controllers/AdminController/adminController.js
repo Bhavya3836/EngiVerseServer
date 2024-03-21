@@ -36,7 +36,7 @@ module.exports.adminLogin = async(req,res)=>{
 
 module.exports.commLoop = async(req,res)=>{
     try{
-        const temp = await communityModel.find()
+        const temp = await communityModel.find().populate("users")
         console.log(temp)
         res.json({message:"Successphool",data:temp})
     }
@@ -47,13 +47,17 @@ module.exports.commLoop = async(req,res)=>{
     }
 }
 
-module.exports.userLoop = async(req,res)=>{
-    try{
-        const data = req.body
-        const temp = await communityModel.find()
-    }
-    catch(e){
-        console.log(e)
-        res.status(400).json({message:e.error,error:e})
-    }
-}
+// module.exports.userLoop = async(req,res)=>{
+//     try{
+//         const data = req.body
+//         const temp = await communityModel.findById(data.id)
+//         const temp2 = temp.user
+//         console.log(temp2)
+
+//         res.json({message:"User Loop Created",data:temp2})
+//     }
+//     catch(e){
+//         console.log(e)
+//         res.status(400).json({message:e.error,error:e})
+//     }
+// }

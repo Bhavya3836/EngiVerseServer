@@ -1,4 +1,6 @@
 const { productmodel } = require("../Models/productmodel")
+const {cartModel} = require("../Models/cartMode")
+
 
 module.exports.searchBar = async(req,res)=>{
     try{
@@ -59,6 +61,21 @@ module.exports.singleProductDetail = async(req,res)=>{
         const temp = await productmodel.findById(id)
         console.log("Hello");
         res.json({message:"Displayed",data:temp})
+    }
+    catch(e){
+        res.json({error:e,message:e.message})
+    }
+}
+
+module.exports.cart = async(req,res) =>{
+    try{
+        const extrackingJWT = req.headers.authorization.split(' ')[1]
+        const decoded = jwt.verify(extrackingJWT,process.env.Skey,'' ,false)
+        const uId = decoded.id
+
+        data = req.body
+        const product = await productmodel.findById(data.id)
+
     }
     catch(e){
         res.json({error:e,message:e.message})
