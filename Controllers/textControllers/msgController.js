@@ -61,10 +61,10 @@ module.exports.messageGetBody = asyncHandler(async (req, res) => {
             let modifiedMsg
             if (id == temp1.id) {
                 const userData = await signupmodel.findById(id, "firstName lastName engineerType1");
-                modifiedMsg = { ...NewMsg._doc, ...userData._doc, status: true };
+                modifiedMsg = { ...NewMsg._doc, ...userData._doc, ...NewMsg.id , status: true };
             } else {
                 const userData = await signupmodel.findById(id, "firstName lastName engineerType1");
-                modifiedMsg = { ...NewMsg._doc, ...userData._doc, status: false };
+                modifiedMsg = { ...NewMsg._doc, ...userData._doc, ...NewMsg.id, status: false };
             }
             modifiedMsgs.push(modifiedMsg);
         }
