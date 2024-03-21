@@ -5,6 +5,7 @@ const {adminHackathon} = require("../Controllers/AdminController/chatAdmin")
 const {createCommunity} = require("../Controllers/textControllers/communityController")
 const {adminLogin} = require("../Controllers/AdminController/adminController")
 const {commLoop} = require("../Controllers/AdminController/adminController")
+const {productFullDesc} = require("../Controllers/AdminController/ecomAdmin")
 
 // const multer = require("multer")
 
@@ -26,6 +27,7 @@ router.route('/productShow').post(productShow)
 router.route('/addHackathon').post(adminHackathon)
 router.route('/adminLogin').post(adminLogin)
 router.route('/commLoop').post(commLoop)
+router.route('/productDesc').post(productFullDesc)
 
 
 //community routes

@@ -32,6 +32,7 @@ const {getGeneralChat} = require("../Controllers/textControllers/communityContro
 
 
 
+
 const router = express.Router()
 
 router.route('/otp').post(otp)
@@ -58,6 +59,7 @@ router.route("/getAllPolls/:id").get(getAllPolls)
 router.route("/changDp/:id").post(changDp)
 router.route("/getMyPolls/:id").get(getMyPolls)
 router.route("/getDp").post(getDp)
+
 
 
 //community routes

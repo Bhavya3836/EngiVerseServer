@@ -1,3 +1,4 @@
+const { model } = require("mongoose")
 const {productmodel} = require("../../Models/productmodel")
 const multer = require("multer")
 
@@ -46,4 +47,17 @@ module.exports.productShow = async(req,res)=>{
         res.json({error:e,message:e.message})
     }
 
+}
+
+module.exports.productFullDesc = async(req,res)=>{
+    try{
+        const {id} = req.body
+
+        const temp = await productmodel.findById(id)
+
+        res.status(200).json({message:"User Found",_id:temp.id,productName:temp.productName,productPrice:temp.productPrice,productDesc:temp.productDesc,productCat:temp.productCat})
+    }
+    catch(e){
+        res.status(400).json({error:e,message:e.message})
+    }
 }
