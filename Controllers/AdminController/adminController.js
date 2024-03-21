@@ -46,3 +46,14 @@ module.exports.commLoop = async(req,res)=>{
         res.status(400).json({message:e.error,error:e})
     }
 }
+
+module.exports.userLoop = async(req,res)=>{
+    try{
+        const data = req.body
+        const temp = await communityModel.find()
+    }
+    catch(e){
+        console.log(e)
+        res.status(400).json({message:e.error,error:e})
+    }
+}
