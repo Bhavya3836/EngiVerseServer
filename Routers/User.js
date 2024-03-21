@@ -30,6 +30,7 @@ const {changDp} = require("../Controllers/UserController")
 const {getDp} = require("../Controllers/UserController")
 const {getGeneralChat} = require("../Controllers/textControllers/communityController")
 const {addToCart} = require("../Controllers/UserEcomController")
+const {viewCart} = require("../Controllers/UserEcomController")
 
 
 
@@ -62,6 +63,7 @@ router.route("/changDp/:id").post(changDp)
 router.route("/getMyPolls/:id").get(getMyPolls)
 router.route("/getDp").post(getDp)
 router.route("/addToCart").post(addToCart)
+router.route("/viewCart").post(viewCart)
 
 
 //community routes

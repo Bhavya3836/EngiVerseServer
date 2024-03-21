@@ -95,6 +95,19 @@ module.exports.addToCart = async (req, res) => {
     } catch (error) {
         console.error(error)
         res.status(500).json({ error: error.message })
-    }
+    } 
 }
 
+module.exports.viewCart = async(req,res) =>{
+    try{
+        const extractingJWT = req.headers.authorization.split(' ')[1]
+        const decoded = jwt.verify(extractingJWT, process.env.Skey)
+        const userId = decoded.id
+
+        const temp = await cartModel.findOne({user:userId})
+        res.status(200).json({data:temp})
+    }
+    catch(e){
+        res.status(500).json({ error: error.message })
+    }
+}
