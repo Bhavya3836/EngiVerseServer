@@ -82,7 +82,7 @@ module.exports.addToCart = async (req, res) => {
         if (!cart) {
             const newCart = new cartModel({
                 user: userId,
-                product: [{ pName: data.pName, pCount: data.pCount }]
+                product: [{ pName: data.id, pCount: data.pCount }]
             })
             await newCart.save()
             console.log(newCart)
@@ -104,10 +104,11 @@ module.exports.viewCart = async(req,res) =>{
         const decoded = jwt.verify(extractingJWT, process.env.Skey)
         const userId = decoded.id
 
-        const temp = await cartModel.findOne({user:userId})
+        const temp = await cartModel.findOne({user:userId}).populate("product.pName")
         res.status(200).json({data:temp})
+        
     }
     catch(e){
-        res.status(500).json({ error: error.message })
+        res.status(500).json({ error: e.message })
     }
 }
