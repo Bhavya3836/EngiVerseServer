@@ -1,6 +1,7 @@
 // const {loginmodel} = require("../Models/loginmodel")
 // const {otpmodel} = require("../Models/otpmodel")
 // const {signupmodel} = require("../Models/signupmodel")
+const { cartModel } = require("../../Models/cartMode")
 const {communityModel} = require("../../Models/communityModel")
 
 const jwt = require('jsonwebtoken')
@@ -61,3 +62,28 @@ module.exports.commLoop = async(req,res)=>{
 //         res.status(400).json({message:e.error,error:e})
 //     }
 // }
+
+
+module.exports.productReports = async(req,res)=>{
+    try{
+        const data = req.body
+        const temp = await productmodel.find()
+        res.json({message:"Success",data:temp})
+    }
+    catch(e){
+        console.log(e)
+        res.json({error:e,message:e.message})
+    }
+}
+
+module.exports.orderReports = async(req,res)=>{
+    try{
+        const data = req.body
+        const temp = await cartModel.find()
+        res.json({message:"Success",data:temp})
+    }
+    catch(e){
+        console.log(e)
+        res.json({error:e,message:e.message})
+    }
+}

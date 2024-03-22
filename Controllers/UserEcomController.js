@@ -112,3 +112,15 @@ module.exports.viewCart = async(req,res) =>{
         res.status(500).json({ error: e.message })
     }
 }
+
+module.exports.checkOut = async(req,res) =>{
+    try{
+        const data = req.body
+        const temp = await productmodel.find()
+        console.log(temp.productCat)
+        res.status(200).json({data:temp})
+    }
+    catch(e){
+        res.status(500).json({ error: e.message })
+    }
+}

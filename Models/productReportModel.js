@@ -30,10 +30,7 @@ module.exports.productmodel = model('productmodel',Schema({
         type:String,
         required:true
     },
-    productStock : {
-        type:String,
-        required:true
-    },
+    
     // productImage : {
     //     type:String,
     //     required:false

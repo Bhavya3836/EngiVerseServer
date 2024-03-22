@@ -31,7 +31,9 @@ const {getDp} = require("../Controllers/UserController")
 const {getGeneralChat} = require("../Controllers/textControllers/communityController")
 const {addToCart} = require("../Controllers/UserEcomController")
 const {viewCart} = require("../Controllers/UserEcomController")
-
+const {checkOut} = require("../Controllers/UserEcomController")
+const {productReports} = require("../Controllers/AdminController/adminController")
+const {orderReports} = require("../Controllers/AdminController/adminController")
 
 
 
@@ -64,6 +66,9 @@ router.route("/getMyPolls/:id").get(getMyPolls)
 router.route("/getDp").post(getDp)
 router.route("/addToCart").post(addToCart)
 router.route("/viewCart").post(viewCart)
+router.route("/checkOut").post(checkOut)
+router.route("/productReports").post(productReports)
+router.route("/orderReports").post(orderReports)
 
 
 //community routes
