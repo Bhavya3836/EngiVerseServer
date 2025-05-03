@@ -89,7 +89,9 @@ module.exports.addToCart = async (req, res) => {
             console.log(newCart)
             res.json({ message: "Product added to cart successfully", cart: newCart })
         } else {
-            await cartModel.findByIdAndUpdate(cart._id, { $push: { "product": { pName: data.id, pCount: data.pCount } } }, { new: true })
+            await cartModel.findByIdAndUpdate(cart._id, {
+                $push: { product: { pName: data.pName, pCount: data?.pCount || 1 } }
+            }, { new: true });
             console.log("Product added to existing cart")
             res.json({ message: "Product added to cart successfully", cart })
         }

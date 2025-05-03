@@ -153,7 +153,7 @@ module.exports.signUp = async (req, res) => {
             lastName: data.lName,
             phNumber: data.phone,
             password: data.password,
-            userName: data.userName,
+            userName: data  .userName,
             dob: data.dob,
             gender: data.gender,
             engineerType1: data.e1,
