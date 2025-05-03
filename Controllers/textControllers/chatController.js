@@ -59,7 +59,6 @@ module.exports.fetchChats = asyncHandler(async (req, res) => {
       const extrackingJWT = req.headers.authorization.split(' ')[1]
       const decoded = jwt.verify(extrackingJWT,process.env.Skey,'' ,false)
       const id = decoded.id
-      console.log(id)
       const result = await chatModel.find({ users: { $elemMatch: { $eq: decoded.id } }})
           .populate({ path: 'users', select: 'firstName lastName profilePicture engineerType1' })
           .populate("latestMessage")
@@ -72,7 +71,7 @@ module.exports.fetchChats = asyncHandler(async (req, res) => {
       const populatedResult = await signupmodel.populate(result, {
           path: "latestMessage.sender",
           select: "firstName lastName"
-      }); 
+      });
       res.status(200).send(populatedResult);
   } catch (e) {
       console.log(e);

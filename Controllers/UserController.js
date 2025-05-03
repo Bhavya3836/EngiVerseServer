@@ -38,6 +38,8 @@ module.exports.showEtype = async(req,res) =>{
         const extrackingJWT = req.headers.authorization.split(' ')[1]
         const decoded = jwt.verify(extrackingJWT,process.env.Skey,'' ,false)
         const id = decoded.id
+        console.log('UserController.js > 41',id)
+
 
         const temp = await communityModel.find({ users: { $elemMatch: { $eq:id } } })       
             .populate('users',"-password" )
@@ -167,7 +169,10 @@ module.exports.signUp = async (req, res) => {
             { $push: { users: modelStore._id } },
             { new: true }
         )
-        const updatedChat = await chatModel.findByIdAndUpdate(pljWork[0].genralChat,{ $push: { users: modelStore._id } },{ new: true })
+        console.log('UserController.js > 170',pljWork[0])
+
+
+        const updatedChat = await chatModel.findByIdAndUpdate(pljWork[0]?.genralChat,{ $push: { users: modelStore._id } },{ new: true })
 
         res.json({ message: "Sign Up Done!!" })
     } catch (e) {
