@@ -157,7 +157,7 @@ module.exports.signUp = async (req, res) => {
             dob: data.dob,
             gender: data.gender,
             engineerType1: data.e1,
-            profilePicture :data.profilePicture
+            profilePicture :data?.profilePicture || "1"
         });
 
         await modelStore.save();

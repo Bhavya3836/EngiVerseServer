@@ -75,6 +75,7 @@ module.exports.addToCart = async (req, res) => {
         const userId = decoded.id
 
         const data = req.body
+        console.log(data)
         const product = await productmodel.findById(data.id)
 
         const cart = await cartModel.findOne({ user: userId })
@@ -82,7 +83,7 @@ module.exports.addToCart = async (req, res) => {
         if (!cart) {
             const newCart = new cartModel({
                 user: userId,
-                product: [{ pName: data.id, pCount: data.pCount }]
+                product: [{ pName: data.pName, pCount: data.pCount }]
             })
             await newCart.save()
             console.log(newCart)
@@ -105,6 +106,7 @@ module.exports.viewCart = async(req,res) =>{
         const userId = decoded.id
 
         const temp = await cartModel.findOne({user:userId}).populate("product.pName")
+        console.log(temp.product)
         res.status(200).json({data:temp})
         
     }

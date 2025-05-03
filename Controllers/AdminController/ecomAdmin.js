@@ -18,11 +18,13 @@ module.exports.productAdd = async(req,res)=>{
     try{
         const data = req.body
         // const imageName = req.file.filename;
+        console.log(data);
         const modelStore = new productmodel({
             productName : data.pName,
             productPrice : data.pPrice, 
             productDesc: data.pDesc,
             productQuantity : data.pquant,
+            productStock : data.pquant,
             productCat : data.pCat,
             //productImage : imageName
         })
