@@ -34,7 +34,8 @@ mongoose.connect(process.env.MongURL).then(()=>{
 }).catch((err)=>{
     console.log(err)
 })
-
+console.log("ABCDEGASDASD")
 app.listen(port,()=>{
     console.log(`The server is active on port ${port}`)
 })
+log
