@@ -23,6 +23,9 @@ app.use(cors({
     exposedHeaders: ['Content-Type']
 }))
 
+app.get('/',(req,res)=>{
+    res.send("Hello World")
+})
 app.use('/user',loginR)
 app.use('/admin',adminR)
 
