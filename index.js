@@ -38,4 +38,3 @@ console.log("ABCDEGASDASD")
 app.listen(port,()=>{
     console.log(`The server is active on port ${port}`)
 })
-log
